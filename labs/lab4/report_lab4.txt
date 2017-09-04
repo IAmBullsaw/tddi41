@@ -1,0 +1,36 @@
+
+1-1 ./command.sh 'a b c' d e f
+
+    "$*" / $* will se: a b c d e f / a b c d e f
+
+    "$@" / $@ will se 'a b c' d e f / a b c d e f
+
+--------------------------------------------------
+
+2-1 För att a b c "very long" skall bli just "very long" och inte "very" "long"
+
+2-2 Nej, eftersom då får vi ut en endaste lång sträng som innehåller alla parametrar.
+
+--------------------------------------------------
+
+3-1 En while loop körs så länge som det som står inom [] är sant.
+    Ex:
+
+    while [ $i -lt 4 ]
+    do
+      echo "hejsan"
+    done
+
+    detta kommer att skriva ut hejsan till skärmen så länge som $1 < 4,
+    det innebär att så länge som detta är sant en gång så kommer det att
+    vara sant för evigt.
+
+--------------------------------------------------
+
+5-1 Läser första bokstaven i en parmeter, dvs slice mellan 0:1
+
+5-2 : betyder används som "no operation"
+
+5-3 $()
+
+5-4 Arithmetic expansion
