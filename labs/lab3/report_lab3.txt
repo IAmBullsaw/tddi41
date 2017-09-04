@@ -15,8 +15,8 @@ c) it will list which files are installed on this system from given package, bin
 
 6-2 / and then enter the search term
 
-6-3
+6-3 -
 
-6-4
+6-4 g / gg
 
-6-5
+6-5 Broken packed
