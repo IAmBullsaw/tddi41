@@ -35,4 +35,6 @@
 
 5-4 Arithmetic expansion, alla token i uttrycket genomgår parameter och variabel expansion, command substitution samt borttagning av "' och resultatet är ett aritmetiskt.
 
+5-5 ls -a | grep -c -E "^[.]\w+"
+
 
