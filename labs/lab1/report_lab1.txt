@@ -1,0 +1,7 @@
+6-1 What command would you use to copy the file /etc/network/interfaces from the UML to marsix.
+	scp -r root@192.168.1.105:/etc/default .
+
+6-2 What command would you use to copy the directory /etc/default (and all its contents) from the UML to marsix. 
+	
+	scp -r root@192.168.1.105:/etc/default .
+

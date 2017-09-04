@@ -1,0 +1,265 @@
+3-1
+
+a) 
+Section 1
+  user commands (introduction)
+Section 2
+  system calls (introduction)
+Section 3
+  library functions (introduction)
+Section 4
+  special files (introduction)
+Section 5
+  file formats (introduction)
+Section 6
+  games (introduction)
+Section 7
+  conventions and miscellany (introduction)
+Section 8
+  administration and privileged commands (introduction)
+Section L
+  math library functions
+Section N
+  tcl functions
+
+
+b) 1
+
+c) 5
+
+d) 8
+
+
+-------------------------------------------------
+
+4-1
+
+a) mkpassword är kommandot, det tar 2 parametrar. först lösenordet och sedan det som lösenordet skall saltas med.
+
+b) allt [] betyder att det är valbart. Så detta kommando kan ta en eller flera option och det är möjligt med en input som den kan ha en output
+
+c) det är valbart mellan de olika flaggorna inom första [] och övriga parametrar/flaggor är lika valbara.
+
+d) chcon tar noll eller flera options och en eller flera context file.
+   chcon tar noll eller flera options och valbart en flagga -u följt av vilken USER, valbart en flagga -r följt av ROLE och sedan en eller flera filer.
+   chchon tar noll eller flera options en --reference=RFILE samt en eller flera FILEr.
+
+ 
+-------------------------------------------------
+
+4-2
+
+a) A brief overview of the command and a full list flags and a short description of what the flag does ...
+
+b) Description
+
+c) i "See Also" oftast sist.
+
+d) i delen FILES
+
+
+
+-------------------------------------------------
+
+4-3
+
+a) -a or -all
+
+b) --wildcard
+
+--------------------------------------------------
+
+4-4
+
+a) List information about the FILEs (the current directory by default)
+
+b) ls -l
+
+c) list subdirectories recursively
+
+
+--------------------------------------------------
+
+5-1
+
+a) ./ssh 
+
+b) ../bin/ssh
+
+--------------------------------------------------
+
+6-1
+
+a) chmod u=rw,go=r ~/Desktop/lol.txt 
+
+b) chmod g-w ~/Desktop/lol.txt
+
+c) chmod u+x,g+x ~/Desktop/lol.txt
+
+--------------------------------------------------
+
+7-1 
+
+a) -rw-rw-rw- [666]
+
+b) -rwxrwx--- [770]
+
+c) -rw-r----- [640]
+
+d) -r--r--r-- [444]
+
+7-2 
+  -R, --recursive
+
+7-3
+  Ger access till att få gå in i dirren och kolla på alla fina inodes där inne.
+
+7-4
+  Kör man a) försvinner rättigheterna för att exekvera dirs, vilket är typiskt dåligt. Kör vi c) så tar vi inte hänsyn till att vi inte skall kunna exekvera filer utan bara lägger till eller tar bort det vi faktiskt ändrar på (så vi kommer behålla exekveringsrättigheter på de filer vi har det på). b) tar hänsyn till att vi faktiskt skall kunna exekvera mappar, tyvärr så får både grupp och användare exekvera filer då... men minst mest fel i det här kommandot. 
+
+SVAR: b)
+
+--------------------------------------------------
+
+8-1
+
+chown -R user:group dir 
+
+
+--------------------------------------------------
+
+9-1
+  changing directory one level up
+
+9-2
+  traversera två steg upp i mapphiearkin
+9-3
+  -l för long format som listar allt
+  -a visar allt, även hidden files
+  -F visar ett tecken [*/=>@|] för att demonstrera vilken typ av grej det är. t.ex. / för dir
+9-4
+  a)står för att "non-file"n är en Character special och man kan gissa att det handlar om ett ljudkort eftersom gruppägaren är audio.
+
+  b) Dave är username för ägaren och staff är namnet på gruppen som har rättigheter för den
+  c) root and users in the group audio. 
+
+9-5
+  vi skriver över b med a och ja, det är default att bli varnad.
+
+9-6
+  lättast är att köra -a (--archive)
+
+9-7
+  
+  Valbart då root får göra allt: chown root:wheel secret
+  eller chown :wheel secret
+  chmod g=r,uo= secret
+
+--------------------------------------------------
+
+10-2
+  FILES
+       /bin/bash
+              The bash executable
+       /etc/profile
+              The systemwide initialization file, executed for login shells
+       /etc/bash.bashrc
+              The systemwide per-interactive-shell startup file
+       /etc/bash.bash.logout
+              The systemwide login shell cleanup file, executed when a login shell exits
+       ~/.bash_profile
+              The personal initialization file, executed for login shells
+       ~/.bashrc
+              The individual per-interactive-shell startup file
+       ~/.inputrc
+              Individual readline initialization file
+  
+ 
+--------------------------------------------------
+
+11-1
+      PATH=/home/nikni292/.rbenv/shims:/home/nikni292/.rbenv/bin:/usr/local/bin:/bin:/usr/bin:/sw/local/bin:/usr/games:.:/opt/thinlinc/bin
+
+11-2
+      my home directory (path)
+
+11-3 
+      PATH=/sbin/:/home/TDDI41/bin:$PATH
+
+--------------------------------------------------
+
+12-1
+
+  command >file1 - error till skärm, resten till fil.
+  
+  command 2>&1 >file1 error till skärm, resten till fil. 
+
+  command >file1 2>&1 - allt till fil. 
+
+--------------------------------------------------
+
+13-1
+
+a) ls listar mappar och filer till stdout och resultatet pipeas in till grep som då filtrerar ut rader med "doc" -ignoring case  
+
+b) skicka fel dit stdout nu pekar, pipe detta till grep som söker efter "fail" med -ignoring case. 
+
+c) alla fel kommer att pipas till grep (all annan output hamnar i /dev/null) vi pipar sedan allt till grep och letar efter fail med -ignore case. 
+
+13-2
+
+a) ls -Ra > /tmp/HOMEFILES
+
+b) ls -Rla / 2>/dev/null | grep "^........w."
+
+--------------------------------------------------
+
+14-2
+	ps aux | grep "ping 127.0.0.1"
+	kill 114546
+14-3
+	Skickar signal SIGKILL till pid.
+	
+	Alla processer större än -1 kommer att stängas ner. Om du är root innebär det ALLT om du 
+	är user så kommer alla processer som du har access till stängas ner. Gör det inte! 
+                                                           
+--------------------------------------------------
+
+16-1	g
+
+16-2	G
+	
+16-3 	/option 
+	?option
+
+16-4	n
+
+16-5	
+	a) 
+
+	b) 
+
+--------------------------------------------------
+
+18-1 tail -f $path 
+     +-------------> Skriver ut de sista 10 raderna av en fil
+          +--------> Follow, vilket innbär att programmet fortsätter att köra och matar ut efter hand. 
+	     +-----> Källan som skall användas
+18-2l -f /var/log/syslog | grep -i "cron"
+
+--------------------------------------------------
+
+19-1 bootlogs, motd, rsyslog, cron, rc.local, rmnologin
+     and also running killprocs, single from rc1 
+                      
+19-2 when ssh is active the process can be found in /etc/init.d -> then we can do a simple
+     /etc/init.d/ssh restart  
+       
+--------------------------------------------------
+
+20-1 a) errors will go to stdout and other information will saved in file file1
+     b) all output will go to the file.
+
+20-2  
+
+	
