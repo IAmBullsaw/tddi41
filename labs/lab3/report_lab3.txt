@@ -10,3 +10,13 @@ d) first performs upgrade which updates the installed packages from source, then
 a) retrieves a list of possible packages to install, and if given a pattern all packages  matching the given pattern.
 b) purge removes everything, even config files, related to the package given, here vim.
 c) it will list which files are installed on this system from given package, bind9.
+
+6-1 l and then enter the serach term and press enter.
+
+6-2 / and then enter the search term
+
+6-3
+
+6-4
+
+6-5
