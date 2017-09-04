@@ -37,4 +37,14 @@
 
 5-5 ls -a | grep -c -E "^[.]\w+"
 
+--------------------------------------------------
 
+6-1
+    a) Används för att dela upp kommandot på flera rader, interpretatorn kommer att tolka kommandot som en endaste rad när den körs.
+
+    b) När vi använder måsvingar så kommer all kod inom blocket att köras, sätter vi paranteser i stället så kommer vi att hoppa över exit kommandot och vi kommer förbi
+       spärren som kontrollerar om det finns 3 parametrar.
+
+6-2 Varabler är i bash globala per default. Genom att sätta local så ser vi till att variablen endast är tillgänglig i detta block.
+
+6-3 Troligtvis för att göra outputen mer läsbar.
