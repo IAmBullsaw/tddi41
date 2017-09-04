@@ -236,9 +236,9 @@ b) find / -perm -o=w
 16-4	n
 
 16-5
-	a)
+	a) no is the default value
 
-	b)
+	b) xauth witch are included in the xbase-clients package.
 
 --------------------------------------------------
 
@@ -246,7 +246,7 @@ b) find / -perm -o=w
      +-------------> Skriver ut de sista 10 raderna av en fil
           +--------> Follow, vilket innbär att programmet fortsätter att köra och matar ut efter hand.
 	     +-----> Källan som skall användas
-18-2l -f /var/log/syslog | grep -i "cron"
+18-2 tail -f /var/log/syslog | grep -i "cron"
 
 --------------------------------------------------
 
