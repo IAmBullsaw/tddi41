@@ -1,6 +1,6 @@
 3-1
 
-a) 
+a)
 Section 1
   user commands (introduction)
 Section 2
@@ -44,7 +44,7 @@ d) chcon tar noll eller flera options och en eller flera context file.
    chcon tar noll eller flera options och valbart en flagga -u följt av vilken USER, valbart en flagga -r följt av ROLE och sedan en eller flera filer.
    chchon tar noll eller flera options en --reference=RFILE samt en eller flera FILEr.
 
- 
+
 -------------------------------------------------
 
 4-2
@@ -82,7 +82,7 @@ c) list subdirectories recursively
 
 5-1
 
-a) ./ssh 
+a) ./ssh
 
 b) ../bin/ssh
 
@@ -90,7 +90,7 @@ b) ../bin/ssh
 
 6-1
 
-a) chmod u=rw,go=r ~/Desktop/lol.txt 
+a) chmod u=rw,go=r ~/Desktop/lol.txt
 
 b) chmod g-w ~/Desktop/lol.txt
 
@@ -98,7 +98,7 @@ c) chmod u+x,g+x ~/Desktop/lol.txt
 
 --------------------------------------------------
 
-7-1 
+7-1
 
 a) -rw-rw-rw- [666]
 
@@ -108,14 +108,14 @@ c) -rw-r----- [640]
 
 d) -r--r--r-- [444]
 
-7-2 
+7-2
   -R, --recursive
 
 7-3
   Ger access till att få gå in i dirren och kolla på alla fina inodes där inne.
 
 7-4
-  Kör man a) försvinner rättigheterna för att exekvera dirs, vilket är typiskt dåligt. Kör vi c) så tar vi inte hänsyn till att vi inte skall kunna exekvera filer utan bara lägger till eller tar bort det vi faktiskt ändrar på (så vi kommer behålla exekveringsrättigheter på de filer vi har det på). b) tar hänsyn till att vi faktiskt skall kunna exekvera mappar, tyvärr så får både grupp och användare exekvera filer då... men minst mest fel i det här kommandot. 
+  Kör man a) försvinner rättigheterna för att exekvera dirs, vilket är typiskt dåligt. Kör vi c) så tar vi inte hänsyn till att vi inte skall kunna exekvera filer utan bara lägger till eller tar bort det vi faktiskt ändrar på (så vi kommer behålla exekveringsrättigheter på de filer vi har det på). b) tar hänsyn till att vi faktiskt skall kunna exekvera mappar, tyvärr så får både grupp och användare exekvera filer då... men minst mest fel i det här kommandot.
 
 SVAR: b)
 
@@ -123,7 +123,7 @@ SVAR: b)
 
 8-1
 
-chown -R user:group dir 
+chown -R user:group dir
 
 
 --------------------------------------------------
@@ -141,7 +141,7 @@ chown -R user:group dir
   a)står för att "non-file"n är en Character special och man kan gissa att det handlar om ett ljudkort eftersom gruppägaren är audio.
 
   b) Dave är username för ägaren och staff är namnet på gruppen som har rättigheter för den
-  c) root and users in the group audio. 
+  c) root and users in the group audio.
 
 9-5
   vi skriver över b med a och ja, det är default att bli varnad.
@@ -150,7 +150,7 @@ chown -R user:group dir
   lättast är att köra -a (--archive)
 
 9-7
-  
+
   Valbart då root får göra allt: chown root:wheel secret
   eller chown :wheel secret
   chmod g=r,uo= secret
@@ -173,8 +173,8 @@ chown -R user:group dir
               The individual per-interactive-shell startup file
        ~/.inputrc
               Individual readline initialization file
-  
- 
+
+
 --------------------------------------------------
 
 11-1
@@ -183,7 +183,7 @@ chown -R user:group dir
 11-2
       my home directory (path)
 
-11-3 
+11-3
       PATH=/sbin/:/home/TDDI41/bin:$PATH
 
 --------------------------------------------------
@@ -191,26 +191,27 @@ chown -R user:group dir
 12-1
 
   command >file1 - error till skärm, resten till fil.
-  
-  command 2>&1 >file1 error till skärm, resten till fil. 
 
-  command >file1 2>&1 - allt till fil. 
+  command 2>&1 >file1 error till skärm, resten till fil.
+
+  command >file1 2>&1 - allt till fil.
 
 --------------------------------------------------
 
 13-1
 
-a) ls listar mappar och filer till stdout och resultatet pipeas in till grep som då filtrerar ut rader med "doc" -ignoring case  
+a) ls listar mappar och filer till stdout och resultatet pipeas in till grep som då filtrerar ut rader med "doc" -ignoring case
 
-b) skicka fel dit stdout nu pekar, pipe detta till grep som söker efter "fail" med -ignoring case. 
+b) skicka fel dit stdout nu pekar, pipe detta till grep som söker efter "fail" med -ignoring case.
 
-c) alla fel kommer att pipas till grep (all annan output hamnar i /dev/null) vi pipar sedan allt till grep och letar efter fail med -ignore case. 
+c) alla fel kommer att pipas till grep (all annan output hamnar i /dev/null) vi pipar sedan allt till grep och letar efter fail med -ignore case.
 
 13-2
 
 a) ls -Ra > /tmp/HOMEFILES
 
-b) ls -Rla / 2>/dev/null | grep "^........w."
+b) find / -perm -o=w
+   old answer before reading question: ls -Rla / 2>/dev/null | grep "^........w."
 
 --------------------------------------------------
 
@@ -219,47 +220,45 @@ b) ls -Rla / 2>/dev/null | grep "^........w."
 	kill 114546
 14-3
 	Skickar signal SIGKILL till pid.
-	
-	Alla processer större än -1 kommer att stängas ner. Om du är root innebär det ALLT om du 
-	är user så kommer alla processer som du har access till stängas ner. Gör det inte! 
-                                                           
+
+	Alla processer större än -1 kommer att stängas ner. Om du är root innebär det ALLT om du
+	är user så kommer alla processer som du har access till stängas ner. Gör det inte!
+
 --------------------------------------------------
 
 16-1	g
 
 16-2	G
-	
-16-3 	/option 
+
+16-3 	/option
 	?option
 
 16-4	n
 
-16-5	
-	a) 
+16-5
+	a)
 
-	b) 
+	b)
 
 --------------------------------------------------
 
-18-1 tail -f $path 
+18-1 tail -f $path
      +-------------> Skriver ut de sista 10 raderna av en fil
-          +--------> Follow, vilket innbär att programmet fortsätter att köra och matar ut efter hand. 
+          +--------> Follow, vilket innbär att programmet fortsätter att köra och matar ut efter hand.
 	     +-----> Källan som skall användas
 18-2l -f /var/log/syslog | grep -i "cron"
 
 --------------------------------------------------
 
 19-1 bootlogs, motd, rsyslog, cron, rc.local, rmnologin
-     and also running killprocs, single from rc1 
-                      
+     and also running killprocs, single from rc1
+
 19-2 when ssh is active the process can be found in /etc/init.d -> then we can do a simple
-     /etc/init.d/ssh restart  
-       
+     /etc/init.d/ssh restart
+
 --------------------------------------------------
 
 20-1 a) errors will go to stdout and other information will saved in file file1
      b) all output will go to the file.
 
-20-2  
-
-	
+20-2
