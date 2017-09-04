@@ -1,0 +1,12 @@
+# # APT
+
+1-1
+a) apt-get install
+b) apt-get remove
+c) it updates/resynchronizes the cached packages index from sources.list
+d) first performs upgrade which updates the installed packages from source, then upgrades the system to the newest distribution available.
+
+1-2
+a) retrieves a list of possible packages to install, and if given a pattern all packages  matching the given pattern.
+b) purge removes everything, even config files, related to the package given, here vim.
+c) it will list which files are installed on this system from given package, bind9.
