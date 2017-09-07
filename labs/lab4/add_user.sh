@@ -27,7 +27,7 @@ function addUser () {
   echo "$1:$2" | chpasswd
 }
 
-[ "$1" ] && [ -e "$1" ] || { printUsage; exit 1;}
+[ "$1" ] && [ -e "$1" ] || { printUsage; exit 1;} #file exists?
 
 echo "username  | password"
 echo "----------+---------------------------------"
