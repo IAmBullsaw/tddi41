@@ -1,47 +1,39 @@
-#! /bin/bash
+#!/bin/bash
 
 function printUsage {
     echo "Usage: $0 filename.txt"
     echo "File contains one full name per line, formatted as: Firstname Lastname"
 }
 
-function getRandomHash {
-    echo "$(( ( RANDOM % 9 ) +1 ))$(( ( RANDOM % 9 ) +1 ))$(( ( RANDOM % 9 ) +1 ))"
+function createUserName () {
+  local begin="${1:0:3}"
+  local end="${2:0:2}"
+  local num=$(((RANDOM%900+100)))
+
+  local username=`echo "$begin$end$num" | tr [:upper:] [:lower:]`
+  while [ `grep -c "^$username:" /etc/passwd` -eq 1 ]; do
+    num=$(((RANDOM%900+100)))
+    username=`echo "$begin$end$num" | tr [:upper:] [:lower:]`
+  done
+  echo $username
 }
 
-function getRandomNumber {
-    echo "$(( ( RANDOM % 9 ) +1 ))"
+function createUserPassword () {
+  echo $(date +%s | sha256sum | base64 | head -c 32)
 }
 
-function getRandomLetter {
-    echo "a"
+function addUser () {
+  adduser $1 --gecos "first last, roomnumber, workphone, homephone" --disabled-password
+  echo "$1:$2" | chpasswd
 }
 
-function getUserName {
-    local front="${1:0:3}"
-    local end="${2:0:2}"
-    local rand=001
-    #$(getRandomHash)
-    echo "$front$end$rand" | tr [:upper:] [:lower:]
-}
+[ "$1" ] && [ -e "$1" ] || { printUsage; exit 1;}
 
-function getPassword {
-    local pass=""
-    local length=10
-    for i in `seq 0 $length`; do
-        if [ $(( $RANDOM % 1 )) ]; then
-            pass="$pass$(getRandomNumber)"
-        else
-            pass="$pass$(getRandomLetter)"
-        fi
-    done
-    echo $pass
-}
-
-[ "$1" ] && [ -e "$1" ] || { printUsage; exit 1;} #file exists?
-
+echo "username  | password"
+echo "----------+---------------------------------"
 while IFS=" " read fname lname; do
-    uname=$(getUserName $fname $lname)
-    passw=$(getPassword)
-    echo "$uname $passw $getRandomLetter"
+  user="$(createUserName $fname $lname)"
+  passwd="$(createUserPassword)"
+  echo "$(addUser $user $passwd)" > /dev/null
+  echo "$user  | $passwd"
 done < "$1"
