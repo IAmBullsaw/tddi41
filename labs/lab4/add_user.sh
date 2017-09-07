@@ -9,6 +9,7 @@ function createUserName () {
   local begin="${1:0:3}"
   local end="${2:0:2}"
   local num=$(((RANDOM%900+100)))
+<<<<<<< Updated upstream
 
   local username=`echo "$begin$end$num" | tr [:upper:] [:lower:]`
   while [ `grep -c "^$username:" /etc/passwd` -eq 1 ]; do
@@ -22,6 +23,16 @@ function createUserPassword () {
   echo $(date +%s | sha256sum | base64 | head -c 32)
 }
 
+=======
+
+  echo "$begin$end$num" | tr [:upper:] [:lower:]
+}
+
+function createUserPassword () {
+  echo $(date +%s | sha256sum | base64 | head -c 32)
+}
+
+>>>>>>> Stashed changes
 function addUser () {
   adduser $1 --gecos "first last, roomnumber, workphone, homephone" --disabled-password
   echo "$1:$2" | chpasswd
@@ -30,10 +41,18 @@ function addUser () {
 [ "$1" ] && [ -e "$1" ] || { printUsage; exit 1;} #file exists?
 
 echo "username  | password"
+<<<<<<< Updated upstream
 echo "----------+---------------------------------"
 while IFS=" " read fname lname; do
   user="$(createUserName $fname $lname)"
   passwd="$(createUserPassword)"
   echo "$(addUser $user $passwd)" > /dev/null
   echo "$user  | $passwd"
+=======
+echo "----------+-------------------------"
+while IFS=" " read fname lname; do
+  user="$(createUserName $fname $lname)"
+  passwd="$(createUserPassword)"
+  echo "$(addUser $user $passwd)"
+>>>>>>> Stashed changes
 done < "$1"

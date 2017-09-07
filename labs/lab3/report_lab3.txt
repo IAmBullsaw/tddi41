@@ -11,12 +11,17 @@ a) retrieves a list of possible packages to install, and if given a pattern all 
 b) purge removes everything, even config files, related to the package given, here vim.
 c) it will list which files are installed on this system from given package, bind9.
 
-6-1 l and then enter the serach term and press enter.
+6-1 What command in aptitude will cause the package list to contain only those packages whose names contain a specific word.
+  l and then enter the serach term and press enter.
 
-6-2 / and then enter the search term
+6-2 What command in aptitude lets you search the package list without hiding anything.
+  / and then enter the search term
 
-6-3 -
+6-3 What command marks a package for installation? For deletion.
+  -
 
-6-4 g / gg
+6-4 What command causes all selected actions (installation, deletion, and upgrades) to take place.
+  g / gg
 
-6-5 Broken packed
+6-5 If there is a B in the leftmost column, what does that mean.
+  Broken packed
