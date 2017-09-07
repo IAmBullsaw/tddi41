@@ -1,22 +1,13 @@
 6-1 What command would you use to copy the file /etc/network/interfaces from the UML to marsix.
 	scp -r root@192.168.1.105:/etc/default .
 
-<<<<<<< Updated upstream
-6-2 What command would you use to copy the directory /etc/default (and all its contents) from the UML to marsix. 
-	
-=======
 6-2 What command would you use to copy the directory /etc/default (and all its contents) from the UML to marsix.
 
->>>>>>> Stashed changes
 	scp -r root@192.168.1.105:/etc/default .
 
 3-1
 
-<<<<<<< Updated upstream
-a)
-=======
 a) Which are the nine sections of the Unix manual.
->>>>>>> Stashed changes
 Section 1
   user commands (introduction)
 Section 2
@@ -39,13 +30,6 @@ Section N
   tcl functions
 
 
-<<<<<<< Updated upstream
-b) 1
-
-c) 5
-
-d) 8
-=======
 b) Which section of the manual contains user commands such as cat and ls.
   1
 
@@ -54,22 +38,12 @@ c) Which section documents file formats, such as configuration files.
 
 d) Which section contains system administration commands, such as halt
   8
->>>>>>> Stashed changes
 
 
 -------------------------------------------------
 
 4-1
 
-<<<<<<< Updated upstream
-a) mkpassword är kommandot, det tar 2 parametrar. först lösenordet och sedan det som lösenordet skall saltas med.
-
-b) allt [] betyder att det är valbart. Så detta kommando kan ta en eller flera option och det är möjligt med en input som den kan ha en output
-
-c) det är valbart mellan de olika flaggorna inom första [] och övriga parametrar/flaggor är lika valbara.
-
-d) chcon tar noll eller flera options och en eller flera context file.
-=======
 a) mkpasswd PASSWORD SALT
   mkpassword är kommandot, det tar 2 parametrar. först lösenordet och sedan det som lösenordet skall saltas med.
 
@@ -88,7 +62,6 @@ d) chcon [OPTION]... CONTEXT FILE...
 
 
    chcon tar noll eller flera options och en eller flera context file.
->>>>>>> Stashed changes
    chcon tar noll eller flera options och valbart en flagga -u följt av vilken USER, valbart en flagga -r följt av ROLE och sedan en eller flera filer.
    chchon tar noll eller flera options en --reference=RFILE samt en eller flera FILEr.
 
@@ -97,35 +70,6 @@ d) chcon [OPTION]... CONTEXT FILE...
 
 4-2
 
-<<<<<<< Updated upstream
-a) A brief overview of the command and a full list flags and a short description of what the flag does ...
-
-b) Description
-
-c) i "See Also" oftast sist.
-
-d) i delen FILES
-
-
-
--------------------------------------------------
-
-4-3
-
-a) -a or -all
-
-b) --wildcard
-
---------------------------------------------------
-
-4-4
-
-a) List information about the FILEs (the current directory by default)
-
-b) ls -l
-
-c) list subdirectories recursively
-=======
 a) What do you usually find in the DESCRIPTION section.
 
   A brief overview of the command and a full list flags and a short description of what the flag does ...
@@ -169,32 +113,10 @@ b) What option to ls shows information about file sizes, owner, group, permissio
 c) What does the -R option to ls do? (Don't forget to try it.)
 
   list subdirectories recursively
->>>>>>> Stashed changes
 
 
 --------------------------------------------------
 
-<<<<<<< Updated upstream
-5-1
-
-a) ./ssh
-
-b) ../bin/ssh
-
---------------------------------------------------
-
-6-1
-
-a) chmod u=rw,go=r ~/Desktop/lol.txt
-
-b) chmod g-w ~/Desktop/lol.txt
-
-c) chmod u+x,g+x ~/Desktop/lol.txt
-
---------------------------------------------------
-
-7-1
-=======
 5-1 In the example above name at least one relative path name indicating ssh if a) The current working directory is /usr/bin.
 
 a) The current working directory is /usr/bin.
@@ -224,7 +146,6 @@ c) How can you grant user and group execute permissions without changing any oth
 --------------------------------------------------
 
 7-1 What do the following numeric file modes represent.
->>>>>>> Stashed changes
 
 a) -rw-rw-rw- [666]
 
@@ -234,15 +155,6 @@ c) -rw-r----- [640]
 
 d) -r--r--r-- [444]
 
-<<<<<<< Updated upstream
-7-2
-  -R, --recursive
-
-7-3
-  Ger access till att få gå in i dirren och kolla på alla fina inodes där inne.
-
-7-4
-=======
 7-2 What command-line argument to chmod allows you to alter the permissions of an entire directory tree.
 
   -R, --recursive
@@ -253,48 +165,19 @@ d) -r--r--r-- [444]
 
 7-4 A user wants to set the permissions of a directory tree rooted in dir so that the user and group can list, read and write (but not execute) files, but nobody else has any access. Which of the following commands is most appropriate? Why.
 
->>>>>>> Stashed changes
   Kör man a) försvinner rättigheterna för att exekvera dirs, vilket är typiskt dåligt. Kör vi c) så tar vi inte hänsyn till att vi inte skall kunna exekvera filer utan bara lägger till eller tar bort det vi faktiskt ändrar på (så vi kommer behålla exekveringsrättigheter på de filer vi har det på). b) tar hänsyn till att vi faktiskt skall kunna exekvera mappar, tyvärr så får både grupp och användare exekvera filer då... men minst mest fel i det här kommandot.
 
 SVAR: b)
 
 --------------------------------------------------
 
-<<<<<<< Updated upstream
-8-1
-=======
 8-1 How can you change the owner and group of an entire directory tree (a directory, its subdirectories and all the files they contain) with a single command.
->>>>>>> Stashed changes
 
 chown -R user:group dir
 
 
 --------------------------------------------------
 
-<<<<<<< Updated upstream
-9-1
-  changing directory one level up
-
-9-2
-  traversera två steg upp i mapphiearkin
-9-3
-  -l för long format som listar allt
-  -a visar allt, även hidden files
-  -F visar ett tecken [*/=>@|] för att demonstrera vilken typ av grej det är. t.ex. / för dir
-9-4
-  a)står för att "non-file"n är en Character special och man kan gissa att det handlar om ett ljudkort eftersom gruppägaren är audio.
-
-  b) Dave är username för ägaren och staff är namnet på gruppen som har rättigheter för den
-  c) root and users in the group audio.
-
-9-5
-  vi skriver över b med a och ja, det är default att bli varnad.
-
-9-6
-  lättast är att köra -a (--archive)
-
-9-7
-=======
 9-1 What does cd .. do.
 
   changing directory one level up
@@ -332,7 +215,6 @@ chown -R user:group dir
    lättast är att köra -a (--archive)
 
 9-7 How do you make the file secret readable and writable by root, readable by the group wheel and completely inaccessible to everybody else
->>>>>>> Stashed changes
 
   Valbart då root får göra allt: chown root:wheel secret
   eller chown :wheel secret
@@ -340,12 +222,8 @@ chown -R user:group dir
 
 --------------------------------------------------
 
-<<<<<<< Updated upstream
-10-2
-=======
 10-2 What init files does your shell use, and when are they used? (Hint: your shell has a man page, and somewhere near the end there is a section that lists which files it uses).
 
->>>>>>> Stashed changes
   FILES
        /bin/bash
               The bash executable
@@ -376,14 +254,6 @@ chown -R user:group dir
 
 --------------------------------------------------
 
-<<<<<<< Updated upstream
-12-1
-
-  command >file1 - error till skärm, resten till fil.
-
-  command 2>&1 >file1 error till skärm, resten till fil.
-
-=======
 12-1 Where will stdout and stderr be redirected in the following examples? If you want to test your theories, use /home/TDDI41/bin/stdio for command. This program outputs a series of E:s to stderr (file descriptor 2) and a series of O:s to stdout (file descriptor 1).
 
   a) command >file1
@@ -396,26 +266,10 @@ chown -R user:group dir
 
   c) command >file1 2>&1 When answering these, remember that the order of redirections matters.
 
->>>>>>> Stashed changes
   command >file1 2>&1 - allt till fil.
 
 --------------------------------------------------
 
-<<<<<<< Updated upstream
-13-1
-
-a) ls listar mappar och filer till stdout och resultatet pipeas in till grep som då filtrerar ut rader med "doc" -ignoring case
-
-b) skicka fel dit stdout nu pekar, pipe detta till grep som söker efter "fail" med -ignoring case.
-
-c) alla fel kommer att pipas till grep (all annan output hamnar i /dev/null) vi pipar sedan allt till grep och letar efter fail med -ignore case.
-
-13-2
-
-a) ls -Ra > /tmp/HOMEFILES
-
-b) find / -perm -o=w
-=======
 13-1 What do the following commands do? If you want to test your theories, use /home/TDDI41/bin/stdio for command and grep for "E" rather than "fail".
 
 a) ls | grep -i doc
@@ -439,17 +293,10 @@ ls -Ra > /tmp/HOMEFILES
 b) Find any files (using find) on the system that are world-writable (i.e. the write permission for "others" is set). Error messages should be discarded (redirected to /dev/null). This command is actually useful for auditing the security of a system - world-writable files can be security risks.
 
 find / -perm -o=w
->>>>>>> Stashed changes
    old answer before reading question: ls -Rla / 2>/dev/null | grep "^........w."
 
 --------------------------------------------------
 
-<<<<<<< Updated upstream
-14-2
-	ps aux | grep "ping 127.0.0.1"
-	kill 114546
-14-3
-=======
 14-2 Create a long running process in the background by typing ping 127.0.0.1 >/dev/null&. Find out its process id using ps and kill it using kill.
 
   ps aux | grep "ping 127.0.0.1"
@@ -457,7 +304,6 @@ find / -perm -o=w
 
 14-3 What does the command kill -9 pid do, where pid is the number of a process? What does kill -9 -1 do? Read the documentation to figure the last one out as it is a somewhat dangerous command.
 
->>>>>>> Stashed changes
 	Skickar signal SIGKILL till pid.
 
 	Alla processer större än -1 kommer att stängas ner. Om du är root innebär det ALLT om du
@@ -465,36 +311,6 @@ find / -perm -o=w
 
 --------------------------------------------------
 
-<<<<<<< Updated upstream
-16-1	g
-
-16-2	G
-
-16-3 	/option
-	?option
-
-16-4	n
-
-16-5
-	a) no is the default value
-
-	b) xauth witch are included in the xbase-clients package.
-
---------------------------------------------------
-
-18-1 tail -f $path
-     +-------------> Skriver ut de sista 10 raderna av en fil
-          +--------> Follow, vilket innbär att programmet fortsätter att köra och matar ut efter hand.
-	     +-----> Källan som skall användas
-18-2 tail -f /var/log/syslog | grep -i "cron"
-
---------------------------------------------------
-
-19-1 bootlogs, motd, rsyslog, cron, rc.local, rmnologin
-     and also running killprocs, single from rc1
-
-19-2 when ssh is active the process can be found in /etc/init.d -> then we can do a simple
-=======
 16-1 What keystroke in less moves to the beginning of the file.
   g
 
@@ -538,22 +354,14 @@ find / -perm -o=w
 
 19-2 If you wanted to restart the ssh process, what command would you use.
   when ssh is active the process can be found in /etc/init.d -> then we can do a simple
->>>>>>> Stashed changes
      /etc/init.d/ssh restart
 
 --------------------------------------------------
 
-<<<<<<< Updated upstream
-20-1 a) errors will go to stdout and other information will saved in file file1
-     b) all output will go to the file.
-
-20-2
-=======
 20-1 a) Where will stdout and stderr be redirected in the following examples a) command 2>&1 >file1 b) command >file1 2>&1 20-2 Using only ps, grep and kill, write a command that kills any process with "linux" in the name. Note that you must avoid killing the grep process itself (this can be done by crafting the regexp appropriately)! This command line can be used to rapidly terminate any UML running on the system.
   errors will go to stdout and other information will saved in file file1
 20-1 b) all output will go to the file.
 
->>>>>>> Stashed changes
 # # APT
 
 1-1
@@ -567,18 +375,6 @@ a) retrieves a list of possible packages to install, and if given a pattern all 
 b) purge removes everything, even config files, related to the package given, here vim.
 c) it will list which files are installed on this system from given package, bind9.
 
-<<<<<<< Updated upstream
-6-1 l and then enter the serach term and press enter.
-
-6-2 / and then enter the search term
-
-6-3 -
-
-6-4 g / gg
-
-6-5 Broken packed
-#!/bin/bash
-=======
 6-1 What command in aptitude will cause the package list to contain only those packages whose names contain a specific word.
   l and then enter the serach term and press enter.
 
@@ -593,10 +389,7 @@ c) it will list which files are installed on this system from given package, bin
 
 6-5 If there is a B in the leftmost column, what does that mean.
   Broken packed
-
------------------------------------------------------------
-#! /bin/bash
->>>>>>> Stashed changes
+#!/bin/bash
 
 function printUsage {
     echo "Usage: $0 filename.txt"
@@ -607,23 +400,30 @@ function createUserName () {
   local begin="${1:0:3}"
   local end="${2:0:2}"
   local num=$(((RANDOM%900+100)))
-
 <<<<<<< Updated upstream
+
   local username=`echo "$begin$end$num" | tr [:upper:] [:lower:]`
   while [ `grep -c "^$username:" /etc/passwd` -eq 1 ]; do
     num=$(((RANDOM%900+100)))
     username=`echo "$begin$end$num" | tr [:upper:] [:lower:]`
   done
   echo $username
-=======
-  echo "$begin$end$num" | tr [:upper:] [:lower:]
->>>>>>> Stashed changes
 }
 
 function createUserPassword () {
   echo $(date +%s | sha256sum | base64 | head -c 32)
 }
 
+=======
+
+  echo "$begin$end$num" | tr [:upper:] [:lower:]
+}
+
+function createUserPassword () {
+  echo $(date +%s | sha256sum | base64 | head -c 32)
+}
+
+>>>>>>> Stashed changes
 function addUser () {
   adduser $1 --gecos "first last, roomnumber, workphone, homephone" --disabled-password
   echo "$1:$2" | chpasswd
