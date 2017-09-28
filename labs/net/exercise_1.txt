@@ -112,7 +112,6 @@ b) How do you display the current routing table using route? How do you display 
 1-4 Review the documentation for the sysctl command and answer the following.
 
 a) What is a sysctl (not what does the command do, but what a sysctl actually is).
-   // TODO: Fattar inte om det här är rätt.
 
    Det är ett interface som man kan använda för att ändra på kernellens parametrar live under körning så att de slår genom direkt. Man kan även få dessa ändringar att kvarstå efter omstart av systemet.
 
@@ -127,12 +126,12 @@ c) Which sysctl controls IP forwarding.
 **************************************************
 
 1-5 Which addresses are your hosts supposed to use? Which names? Which netmasks and broadcast addresses? You can find this information on the course home page.
-   // TODO: Hittar inte 
-   Adresses: 
-   Hostnames: "You may use any hostnames you want, but router, server, client-1 and client-2 are recommended."
-   Netmasks:
-   Broadcast: 
 
+   For our private netwörk:
+   Adresses: 10.0.0.1 - 10.255.255.255
+   Hostnames: Felix, Siri, Vera
+   Netmasks: 255.0.0.0
+   Broadcast: DHCP
 
 1-6 Explain the difference between routing and forwarding (as related to IP networking).
 
