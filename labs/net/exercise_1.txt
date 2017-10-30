@@ -128,10 +128,10 @@ c) Which sysctl controls IP forwarding.
 1-5 Which addresses are your hosts supposed to use? Which names? Which netmasks and broadcast addresses? You can find this information on the course home page.
 
    For our private netwörk:
-   Adresses: 10.0.0.1 - 10.255.255.255
+   Adresses: 10.0.0.1 -> 10.255.255.255
    Hostnames: Felix, Siri, Vera
    Netmasks: 255.0.0.0
-   Broadcast: DHCP
+   Broadcast: 10.255.255.255 
 
 1-6 Explain the difference between routing and forwarding (as related to IP networking).
 
