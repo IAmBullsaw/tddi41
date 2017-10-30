@@ -1,0 +1,69 @@
+1-2 Answer the following questions (the information can be found in e.g. the RFCs that describe DNS).
+
+a) What is an authoritative name server? What is its role in DNS.
+
+  Den ger bara svar, den frågar inte vidare efter information som den inte har explicit tilldelats
+  av en system administatör.
+
+  Vad dess roll är att den innehåller informationen för en specefik domän/adress (A, CNAME, PTR etc)
+
+b) What is the difference between a domain and a zone.
+
+  En zon är enkelt sagt en del av en domän. exempelvis domänen apple.com
+  kan innehålla information om sales.apple.com och support.apple.com men zonen
+  apple.com innehåller bara information om apple.com.
+
+c) What is the difference between a recursive and a non-recursive query in DNS? When is each type of query used.
+
+  En rekursiv DNS:en som tar i mot din fråga kommer att hanetra hela förfrågan och skicka tillbaka ditt
+  svar.
+
+  En itterativ där kommer servern inte att svara på din fråga utan ge tillbaka adressen till den server
+  som kan svara på din fråga.
+
+  I ett privat nätverk kan man använda rekursiv eftersom en öppen dns server är mer tillgänglig för hackers
+  att t ex DOSA systemet.
+
+d) What is the purpose of delegation in DNS.
+
+  när se name servern får frågan att hitta abc.se så deligerar den arbetet till en annan server.
+  detta gör att den första nameservern blir direktad till en server som hanterar abc.se, denna kan
+  i sin tur hantera flera <subdomains>.abc.se
+
+e) What is a resource record? What does a resource record consist of.
+
+  Ett resource record <a> mappar en FQDN till en IP adress.
+  den innehåller tex:
+
+  noamdc1 IN A 172.16.48.1
+
+f) DNS messages contain answer, authority and additional sections. What is the purpose of each section.
+
+  answer - innehåller ett eller flera svar på en fråga
+  authority - innehåller en eller flera adresser som kan leda vidare
+  additional - eventuell extra information som inte är nödvändig för att svara på frågan.
+
+g) How does the DNS protocol indicate if an answer comes from an authoritative name server or not? How does the DNS protocol indicate whether a query is recursive or not.
+
+  1: I header så är AA flaggan satt till 1.
+
+  2: RD biten är satt till 1.
+
+h) Explain what glue records are and when they are necessary.
+
+  När vi får frågan vilken nameserver has abc.se så svarar vi med ip adressen till nameservern "fastklistrad" på svaret.
+  För att vi inte skall hamna i en oändlig rekursion.
+
+
+1-3 Which zone in DNS contains PTR records corresponding to IP addresses in the network 10.131.24.64/27? Name some other networks that have PTR records in the same zone. What is the problem with delegating authority over the DNS records corresponding only to 10.131.24.64/27.
+
+  1: 64.24.131.10.in-addr.arpa.
+  2: 10.131.24.64/24-10.131.24.64/32
+  3: Den närmsta zonen vi kan komma är 24.131.10.in-addr.arpa
+
+1-4 Explain the purpose of classless in-addr.arpa delegation. Explain how it works.
+
+  1: För att vi skall kunna bli mera specifika genom att skapa mindre zoner.
+  2: Genom att prefixa det första svaret med ett block [8-15].24.20.171.in-addr.arpa. detta tillsammans med att man lägger till extra lager NS gör att vi kan vara mer specefika.
+
+

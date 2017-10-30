@@ -7,7 +7,7 @@ a) What is the ping utility used for.
 
 
 b) What command-line option to ping causes it to print numerical addresses.
- 
+
    -n
 
 c) How does the ping utility work.
@@ -27,7 +27,7 @@ d) How can you detect if the host 10.17.1.1 is up.
 1-2 Review the documentation for the traceroute utility and answer the following questions.
 
 a) What is the traceroute utility used for.
-   
+
    Det används för att analysera vilken väg paket tar genom nätverket för att ta sig till slutdestinationen.
 
 b) How does traceroute work.
@@ -37,7 +37,7 @@ b) How does traceroute work.
    Med hjälp av det paketet får vi reda på vad som är första hoppets adress, därefter skickas då nästa paket med en TTL på 2 osv.
 
 c) What command-line option causes traceroute to print numerical addresses.
-   
+
    -n
 
 d) Use traceroute with a remote host of your choosing as the target. Explain all the output.
@@ -101,11 +101,11 @@ a) How do you set the address of interface eth0 to 130.236.189.14/24 (netmask 25
 
 b) How do you display the current routing table using route? How do you display it using ip? Using netstat.
 
-   "route" 
+   "route"
 
-   "ip route" 
-    
-    "netstat -r" 
+   "ip route"
+
+    "netstat -r"
 
 **************************************************
 
@@ -120,7 +120,7 @@ b) In what file can you place sysctl values so they are loaded at boot time.
    /etc/sysctl.conf file
 
 c) Which sysctl controls IP forwarding.
-   
+
    net.ipv4.id_forward
 
 **************************************************
@@ -135,9 +135,39 @@ c) Which sysctl controls IP forwarding.
 
 1-6 Explain the difference between routing and forwarding (as related to IP networking).
 
-   Routing innebär att vi sätter upp regler för hur vi skall skicka paket vidare (som inte har oss som 
-   slutdestination). Forwarding är handlingen som vi gör när vi skickar ett paket vidare (i stället för att 
-   t ex bestämma oss för att släppa paketet). 
+   Routing innebär att vi sätter upp regler för hur vi skall skicka paket vidare (som inte har oss som
+   slutdestination). Forwarding är handlingen som vi gör när vi skickar ett paket vidare (i stället för att
+   t ex bestämma oss för att släppa paketet).
 
-   tl;dr routing = regler, fowarding = handling. 
+   tl;dr routing = regler, fowarding = handling.
+
+**************************************************
+
+2-1 Set the hostname on all your hosts. The router should be named gw, the server should be named server and the clients named client-1 and client-2. Don't forget the FQDN. Please use the recommended names - it simplifies things for your lab assistant.
+
+```
+#!/bin/bash
+[ $# -eq 0 ] && { echo "usage: $0 hostname"; exit 1; }
+CURRENTNAME=`hostname`
+[ "$CURRENTNAME" == "$1" ] && [ `cat /etc/hostname | grep -c "$1"` -eq 1 ] || ( echo "Hostname is: $CURRENTNAME and not correctly set up.")
+```
+
+**************************************************
+
+7-1 Answer the following questions.
+
+a) What configuration file controls NSS.
+
+  /etc/default/nss
+
+b) What configuration file controls the resolver.
+
+  /etc/resolv.conf
+
+c) What does the "search" keyword in the resolver configuration file do.
+
+  The search list is normally determined from the local domain name; by default, it contains only the local domain name. This may be changed by listing the desired domain search path following the search keyword with spaces or tabs separating the names
+
+
+**************************************************
 
