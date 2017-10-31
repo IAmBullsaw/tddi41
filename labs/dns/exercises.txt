@@ -67,3 +67,95 @@ h) Explain what glue records are and when they are necessary.
   2: Genom att prefixa det första svaret med ett block [8-15].24.20.171.in-addr.arpa. detta tillsammans med att man lägger till extra lager NS gör att vi kan vara mer specefika.
 
 
+
+**************************************************
+
+2-1 Use the host tool to answer the following questions.
+
+a) What is the address of informatix.ida.liu.se.
+
+  informatix.ida.liu.se has address 130.236.177.26
+
+b) What is the address of www.ida.liu.se.
+
+www.ida.liu.se is an alias for informatix.ida.liu.se.
+informatix.ida.liu.se has address 130.236.177.26
+
+c) What is the address of liu.se.
+
+liu.se has address 130.236.5.66
+
+2-2 Compare the output of host www.ida.liu.se ns3.liu.se and host www.ida.liu.se dns.liu.se and answer the following questions.
+
+a) Why is there no answer in the first query but in the second query.
+
+  ns3.liu.se håller ingen DNS information därför är svaret tomt.
+
+b) Both answers are correct, even though they differ. Explain why.
+
+  se svar ovan.
+
+
+**************************************************
+
+3-1 Use host to find out which name servers are authoritative for the zone adlibris.se. Which organization(s) operate them.
+
+host -t NS adlibris.se.
+
+3-2 Use host to list all records in the sysinst.ida.liu.se zone and wc to count them. How many records are there.
+
+host -a sysinst.ida.liu.se | grep ^sysinst | wc -l
+
+3-3 Use host to find out all information you can about the name ida.liu.se (i.e. the name itself, not the contents of the zone). What did you find out? How can you be sure that is all the information that is available.
+
+host -a ida.liu.se
+
+då flagga -a skall visa all information så skulle detta vara allt.
+
+**************************************************
+
+4-1 Use dig to answer the following questions.
+
+a) What is the address of ida-gw.sysinst.ida.liu.se.
+
+  dig ida-gw.sysinst.ida.liu.se.
+
+  130.236.178.1
+
+b) Which nameservers have authoritative information for sysinst.ida.liu.se.
+
+  dig -t ns sysinst.ida.liu.se.
+
+  sysinst-gw.ida.liu.se.
+  ns.ida.liu.se.
+
+
+c) Which name corresponds to the IPv4 address 130.236.189.1.
+
+  dig -x 130.236.189.1
+
+  idagw-189.ida.liu.se
+
+4-2 Use the trace feature of dig to answer the following questions.
+
+a) What nameservers are consulted in a query for the A record of www.ida.liu.se.
+
+  dig -t a www.ida.liu.se +trace | grep Received
+
+  ;; Received 525 bytes from 2001:6b0:17:f000::9#53(2001:6b0:17:f000::9) in 3 ms
+  ;; Received 925 bytes from 2001:500:2f::f#53(f.root-servers.net) in 5 ms
+  ;; Received 483 bytes from 81.228.10.57#53(e.ns.se) in 13 ms
+  ;; Received 1188 bytes from 130.236.6.244#53(ns4.liu.se) in 2 ms
+  ;; Received 958 bytes from 130.236.146.68#53(ns2.liu.se) in 2 ms
+
+b) What nameservers are consulted when determining the address of update.microsoft.com? Note that the presence of a CNAME record makes this question different from the previous one: you will need to run dig more than once to get the answer.
+
+  dig +trace -t a update.microsoft.com
+  dig +trace -t a update.microsoft.com.nsatc.net.
+
+  ;; Received 525 bytes from 2001:6b0:17:f000::9#53(2001:6b0:17:f000::9) in 3 ms
+  ;; Received 1187 bytes from 192.112.36.4#53(g.root-servers.net) in 405 ms
+  ;; Received 819 bytes from 192.41.162.30#53(l.gtld-servers.net) in 26 ms
+  ;; Received 329 bytes from 4.26.227.27#53(e.ns.nsatc.net) in 52 ms
+
+**************************************************
