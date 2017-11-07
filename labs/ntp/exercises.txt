@@ -1,0 +1,42 @@
+
+ntpdate -- set the date and time via NTP
+ntpd -- NTP daemon program
+ntpq -- standard NTP query program
+
+2-1 Explain the concept of "stratum" in a clock hierarchy (e.g. NTP, but also synchronized networks and other clock hierarchies).
+    Why is it necessary to have a hierarchy of clocks rather than just a bunch of reference clocks.
+    ---
+
+    NTP använder ett hierarkistiskt system för att skapa bättre kommunikation.
+    Stratum 0 : enheter så som atomur, GPS-klockor och andra former av radiobaserade klockor.
+
+    Stratum 1 : dessa är de primära NTP serverarna, dessa servar hämtar sin tid från stratum 0 enheter via
+    sladd.
+
+    Stratum 2 : hämtar sin tid från stratum 1 servrarna.
+
+    Stratum 3 : hämtar sin tid från stratum 2 serverna men fungerar annars precis som stratum 2 serverar, flera
+    servrar kan i sin tur hämta sin tid från denna nivå. (maximalt upp till nivå 16 i NTP version 4).
+
+    För varje nivå så minskar exaktheten något, men det är knappt märkbart vid normal användning.
+
+    Man använder systenet med stratum för att undvika synkroniserings loopar geneom att föredra serverar med ett
+    lågt stratum.
+
+
+2-2 How large a difference between the reference clock and the system clock does NTP accept and attempt to adjust.
+    ---
+
+    Normalt så är det 1000s som är max.
+
+
+2-3 NTP usually works by speeding up or slowing down the clock, not setting it outright. Why.
+    ---
+
+    För att inte två procedurer som är utförda på olika tider skall kunna få samma tid, eller för
+    att ett svar inte skall kunna få en tidstämpel som är äldre än själva frågan. Genom att se till
+    att klockan i stället saktar ner sig så undviks denna typ av konflikter.
+
+
+
+--------------------------------------------------
