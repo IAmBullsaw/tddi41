@@ -2,13 +2,13 @@
 
 function printUsage() {
     echo "-> usage:";
-    echo "-> $0 -ho(stname) -ip(addres) -ne(tmask) -su(bnet) -ga(teway) -v(erbose)"
-    # echo "-> $0 Hostname Ipnumber Netmask Subgroup Gateway";
+    echo "-> $0 -h(ostname) -i(paddres) -n(etmask) -s(ubnet) -g(ateway) -v(erbose)"
+    echo "-> -w for the router"
 }
 
 [ $# -gt 4 ] || { printUsage; exit -1; }
 
-VERBOSE=5 # start at 2 since stdout=1 stderr=2
+VERBOSE=5
 
 declare -A LOG_LEVELS
 # https://en.wikipedia.org/wiki/Syslog#Severity_level
@@ -31,12 +31,12 @@ while getopts 'h:i:n:s:g:vw' flag; do
         g) GATEWAY="${OPTARG}" ;;
         v) ((VERBOSE=VERBOSE+1)) ;;
         w) GWFLAG=true ;;
-        *) error "Unexpected option $(flag)" ;;
+        *) { error "Unexpected option $(flag)"; exit -2; } ;;
     esac
 done
 
 if [ $GWFLAG = true ]; then
-    command -v iptables || { error '-> flag -w requires iptables to be installed. run apt install iptables'; exit -2: }
+    command -v iptables &>/dev/null || { error '-> flag -w requires iptables to be installed. run apt install iptables'; exit -3; }
 fi
 
 echo "-> Performing lab1 ..."
@@ -64,8 +64,10 @@ ifdown -a && ifup -a
 if [ $GWFLAG = true ]; then
     .log 6 'enabling forwarding'
     echo 1 > /proc/sys/net/ipv4/ip_forward
+    .log 7 `cat /proc/sys/net/ipv4/ip_forward`
     iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE # MASQUERAAAAAAAAAAAAADE
     iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
+    .log 7 `ip r`
 fi
 
 echo "-> lab1 done."
