@@ -1,0 +1,173 @@
+Exercise 1: Review and preparation
+1-1 Review the documentation for the ping utility and answer the following questions.
+
+a) What is the ping utility used for.
+
+   Ping används oftast för att se om en tjänst svarar/är nåbar över ett nätverk.
+
+
+b) What command-line option to ping causes it to print numerical addresses.
+
+   -n
+
+c) How does the ping utility work.
+
+   Ett ICMP-paket skickas innehållandes ett ECHO_REQUEST och åkallar ett svar ECHO_RESPONSE från en värd eller gateway.
+   Paketet innehåller sändarens och mottagarens IPadress, samt ICMP-headern och i payloaden utfyllnadsdata.
+
+d) How can you detect if the host 10.17.1.1 is up.
+
+   kör kommandot:
+   "ping -c 3 10.17.1.1"
+   det här skickar tre paket och vi förväntar då oss att få 3 svar tillbaka inom rimlig tid.
+   om inget paket kommer tillbaka utan paketen timeoutar kan vi vara rätt säkra på att målet inte är nåbart.
+
+**************************************************
+
+1-2 Review the documentation for the traceroute utility and answer the following questions.
+
+a) What is the traceroute utility used for.
+
+   Det används för att analysera vilken väg paket tar genom nätverket för att ta sig till slutdestinationen.
+
+b) How does traceroute work.
+
+   Traceroute skickar flera UDP-paket med en TTL(Time To Live) som börjar på 1 och ökar gradvis.
+   Detta för att en router minskar TTLen för varje paket den får och för varje paket som de dödar, skickar de ett svar, ICMP protokollets- Time Exceeded-fel till avsändaren av paketet.
+   Med hjälp av det paketet får vi reda på vad som är första hoppets adress, därefter skickas då nästa paket med en TTL på 2 osv.
+
+c) What command-line option causes traceroute to print numerical addresses.
+
+   -n
+
+d) Use traceroute with a remote host of your choosing as the target. Explain all the output.
+
+   oskja067@li0-4:net$ traceroute www.oskarjansson.com
+   traceroute to www.oskarjansson.com (54.243.70.144), 30 hops max, 60 byte packets
+    1  idagw-185.ida.liu.se (130.236.185.1)  2.031 ms  2.097 ms  2.292 ms
+    2  130.236.6.213 (130.236.6.213)  0.380 ms  0.443 ms  0.490 ms
+    3  a-b-1.net.liu.se (130.236.7.37)  0.529 ms  0.582 ms  0.619 ms
+    4  130.236.9.201 (130.236.9.201)  6.095 ms  6.118 ms  6.111 ms
+    5  linkoping-lin3-r1.sunet.se (130.242.6.74)  0.433 ms  0.425 ms  0.461 ms
+    6  norrkoping-nkg188-r1.sunet.se (130.242.4.79)  1.098 ms  1.135 ms  1.092 ms
+    7  stockholm-fre-r1.sunet.se (130.242.4.56)  3.232 ms  3.175 ms  3.212 ms
+    8  se-fre.nordu.net (109.105.102.9)  3.298 ms  3.289 ms  3.284 ms
+    9  se-tug.nordu.net (109.105.97.2)  3.599 ms  3.578 ms  3.595 ms
+   10  dk-uni.nordu.net (109.105.97.10)  12.517 ms  12.448 ms  12.476 ms
+   11  uk-hex.nordu.net (109.105.97.127)  32.070 ms  31.971 ms  32.000 ms
+   12  us-man.nordu.net (109.105.97.139)  110.705 ms  110.719 ms us-ash.nordu.net (109.105.97.141)  113.234 ms
+   13  us-ash.nordu.net (109.105.97.143)  110.180 ms  111.046 ms 72.21.221.60 (72.21.221.60)  107.087 ms
+   14  * 72.21.221.60 (72.21.221.60)  110.622 ms *
+   15  * * *
+   16  * * *
+   17  54.239.110.167 (54.239.110.167)  123.290 ms 54.239.111.43 (54.239.111.43)  107.482 ms 54.239.110.145 (54.239.110.145)  130.188 ms
+   18  52.93.24.70 (52.93.24.70)  142.151 ms 54.239.108.235 (54.239.108.235)  110.743 ms 54.239.109.47 (54.239.109.47)  111.608 ms
+   19  52.93.24.67 (52.93.24.67)  109.210 ms 205.251.244.203 (205.251.244.203)  111.597 ms *
+   20  * * 52.93.24.91 (52.93.24.91)  116.594 ms
+   21  * * *
+   22  * * *
+   23  * * *
+   24  * * *
+   25  * * *
+   26  * * *
+   27  * * *
+   28  * * *
+   29  * * *
+   30  * * *
+
+   Vid standardkörning av traceroute väljs 30 hopp som max och att paketen är 60 bytes stora.
+   Detta innebär att routen kommer att avslutas efter 30 hopp även om vi inte är framme vid målet.
+
+   En rad ser ut såhär:
+   Vilket hopp | namn (Ip-adress) | RTT mätt i ms för probe 1 probe 2 och probe 3.
+
+   På hopp 14 har bara andra proben resulterat i ett svar, första och tredje representeras av ett *
+   På hopp 15-16 och 21-30 har vi inte fått något svar. De kan ha skickat ett svar med en för låg TTL för att nå oss.
+   Vissa skickar med ett TTL 0 eftersom de svarar med den TTL som finns kvar i paketet vi skickade... (En fantastisk bugg).
+
+   På 17 så ser vi att vi har fått svar från 3 olika IP. Detta kan vara ett resultat av load balancing då svaren kommer från 54.239.*.*.
+
+**************************************************
+
+1-3 Review the documentation for the ifconfig, route, netstat and ip commands and answer the following questions.
+
+a) How do you set the address of interface eth0 to 130.236.189.14/24 (netmask 255.255.255.0) and broadcast address 130.236.189.255 using ifconfig? How do you set it using ip.
+
+   ifconfig eth0 130.236.189.14/24
+   ifconfig eth0 netmask 255.255.255.0
+
+   ip addr add 130.236.189.14/24 dev eth0
+
+
+b) How do you display the current routing table using route? How do you display it using ip? Using netstat.
+
+   "route"
+
+   "ip route"
+
+    "netstat -r"
+
+**************************************************
+
+1-4 Review the documentation for the sysctl command and answer the following.
+
+a) What is a sysctl (not what does the command do, but what a sysctl actually is).
+
+   Det är ett interface som man kan använda för att ändra på kernellens parametrar live under körning så att de slår genom direkt. Man kan även få dessa ändringar att kvarstå efter omstart av systemet.
+
+b) In what file can you place sysctl values so they are loaded at boot time.
+
+   /etc/sysctl.conf file
+
+c) Which sysctl controls IP forwarding.
+
+   net.ipv4.id_forward
+
+**************************************************
+
+1-5 Which addresses are your hosts supposed to use? Which names? Which netmasks and broadcast addresses? You can find this information on the course home page.
+
+   For our private netwörk:
+   Adresses: 10.0.0.1 -> 10.255.255.255
+   Hostnames: Felix, Siri, Vera
+   Netmasks: 255.0.0.0
+   Broadcast: 10.255.255.255 
+
+1-6 Explain the difference between routing and forwarding (as related to IP networking).
+
+   Routing innebär att vi sätter upp regler för hur vi skall skicka paket vidare (som inte har oss som
+   slutdestination). Forwarding är handlingen som vi gör när vi skickar ett paket vidare (i stället för att
+   t ex bestämma oss för att släppa paketet).
+
+   tl;dr routing = regler, fowarding = handling.
+
+**************************************************
+
+2-1 Set the hostname on all your hosts. The router should be named gw, the server should be named server and the clients named client-1 and client-2. Don't forget the FQDN. Please use the recommended names - it simplifies things for your lab assistant.
+
+```
+#!/bin/bash
+[ $# -eq 0 ] && { echo "usage: $0 hostname"; exit 1; }
+CURRENTNAME=`hostname`
+[ "$CURRENTNAME" == "$1" ] && [ `cat /etc/hostname | grep -c "$1"` -eq 1 ] || ( echo "Hostname is: $CURRENTNAME and not correctly set up.")
+```
+
+**************************************************
+
+7-1 Answer the following questions.
+
+a) What configuration file controls NSS.
+
+  /etc/default/nss
+
+b) What configuration file controls the resolver.
+
+  /etc/resolv.conf
+
+c) What does the "search" keyword in the resolver configuration file do.
+
+  The search list is normally determined from the local domain name; by default, it contains only the local domain name. This may be changed by listing the desired domain search path following the search keyword with spaces or tabs separating the names
+
+
+**************************************************
+

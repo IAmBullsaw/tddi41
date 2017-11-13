@@ -1,0 +1,161 @@
+1-2 Answer the following questions (the information can be found in e.g. the RFCs that describe DNS).
+
+a) What is an authoritative name server? What is its role in DNS.
+
+  Den ger bara svar, den frågar inte vidare efter information som den inte har explicit tilldelats
+  av en system administatör.
+
+  Vad dess roll är att den innehåller informationen för en specefik domän/adress (A, CNAME, PTR etc)
+
+b) What is the difference between a domain and a zone.
+
+  En zon är enkelt sagt en del av en domän. exempelvis domänen apple.com
+  kan innehålla information om sales.apple.com och support.apple.com men zonen
+  apple.com innehåller bara information om apple.com.
+
+c) What is the difference between a recursive and a non-recursive query in DNS? When is each type of query used.
+
+  En rekursiv DNS:en som tar i mot din fråga kommer att hanetra hela förfrågan och skicka tillbaka ditt
+  svar.
+
+  En itterativ där kommer servern inte att svara på din fråga utan ge tillbaka adressen till den server
+  som kan svara på din fråga.
+
+  I ett privat nätverk kan man använda rekursiv eftersom en öppen dns server är mer tillgänglig för hackers
+  att t ex DOSA systemet.
+
+d) What is the purpose of delegation in DNS.
+
+  när se name servern får frågan att hitta abc.se så deligerar den arbetet till en annan server.
+  detta gör att den första nameservern blir direktad till en server som hanterar abc.se, denna kan
+  i sin tur hantera flera <subdomains>.abc.se
+
+e) What is a resource record? What does a resource record consist of.
+
+  Ett resource record <a> mappar en FQDN till en IP adress.
+  den innehåller tex:
+
+  noamdc1 IN A 172.16.48.1
+
+f) DNS messages contain answer, authority and additional sections. What is the purpose of each section.
+
+  answer - innehåller ett eller flera svar på en fråga
+  authority - innehåller en eller flera adresser som kan leda vidare
+  additional - eventuell extra information som inte är nödvändig för att svara på frågan.
+
+g) How does the DNS protocol indicate if an answer comes from an authoritative name server or not? How does the DNS protocol indicate whether a query is recursive or not.
+
+  1: I header så är AA flaggan satt till 1.
+
+  2: RD biten är satt till 1.
+
+h) Explain what glue records are and when they are necessary.
+
+  När vi får frågan vilken nameserver has abc.se så svarar vi med ip adressen till nameservern "fastklistrad" på svaret.
+  För att vi inte skall hamna i en oändlig rekursion.
+
+
+1-3 Which zone in DNS contains PTR records corresponding to IP addresses in the network 10.131.24.64/27? Name some other networks that have PTR records in the same zone. What is the problem with delegating authority over the DNS records corresponding only to 10.131.24.64/27.
+
+  1: 64.24.131.10.in-addr.arpa.
+  2: 10.131.24.64/24-10.131.24.64/32
+  3: Den närmsta zonen vi kan komma är 24.131.10.in-addr.arpa
+
+1-4 Explain the purpose of classless in-addr.arpa delegation. Explain how it works.
+
+  1: För att vi skall kunna bli mera specifika genom att skapa mindre zoner.
+  2: Genom att prefixa det första svaret med ett block [8-15].24.20.171.in-addr.arpa. detta tillsammans med att man lägger till extra lager NS gör att vi kan vara mer specefika.
+
+
+
+**************************************************
+
+2-1 Use the host tool to answer the following questions.
+
+a) What is the address of informatix.ida.liu.se.
+
+  informatix.ida.liu.se has address 130.236.177.26
+
+b) What is the address of www.ida.liu.se.
+
+www.ida.liu.se is an alias for informatix.ida.liu.se.
+informatix.ida.liu.se has address 130.236.177.26
+
+c) What is the address of liu.se.
+
+liu.se has address 130.236.5.66
+
+2-2 Compare the output of host www.ida.liu.se ns3.liu.se and host www.ida.liu.se dns.liu.se and answer the following questions.
+
+a) Why is there no answer in the first query but in the second query.
+
+  ns3.liu.se håller ingen DNS information därför är svaret tomt.
+
+b) Both answers are correct, even though they differ. Explain why.
+
+  se svar ovan.
+
+
+**************************************************
+
+3-1 Use host to find out which name servers are authoritative for the zone adlibris.se. Which organization(s) operate them.
+
+host -t NS adlibris.se.
+
+3-2 Use host to list all records in the sysinst.ida.liu.se zone and wc to count them. How many records are there.
+
+host -a sysinst.ida.liu.se | grep ^sysinst | wc -l
+
+3-3 Use host to find out all information you can about the name ida.liu.se (i.e. the name itself, not the contents of the zone). What did you find out? How can you be sure that is all the information that is available.
+
+host -a ida.liu.se
+
+då flagga -a skall visa all information så skulle detta vara allt.
+
+**************************************************
+
+4-1 Use dig to answer the following questions.
+
+a) What is the address of ida-gw.sysinst.ida.liu.se.
+
+  dig ida-gw.sysinst.ida.liu.se.
+
+  130.236.178.1
+
+b) Which nameservers have authoritative information for sysinst.ida.liu.se.
+
+  dig -t ns sysinst.ida.liu.se.
+
+  sysinst-gw.ida.liu.se.
+  ns.ida.liu.se.
+
+
+c) Which name corresponds to the IPv4 address 130.236.189.1.
+
+  dig -x 130.236.189.1
+
+  idagw-189.ida.liu.se
+
+4-2 Use the trace feature of dig to answer the following questions.
+
+a) What nameservers are consulted in a query for the A record of www.ida.liu.se.
+
+  dig -t a www.ida.liu.se +trace | grep Received
+
+  ;; Received 525 bytes from 2001:6b0:17:f000::9#53(2001:6b0:17:f000::9) in 3 ms
+  ;; Received 925 bytes from 2001:500:2f::f#53(f.root-servers.net) in 5 ms
+  ;; Received 483 bytes from 81.228.10.57#53(e.ns.se) in 13 ms
+  ;; Received 1188 bytes from 130.236.6.244#53(ns4.liu.se) in 2 ms
+  ;; Received 958 bytes from 130.236.146.68#53(ns2.liu.se) in 2 ms
+
+b) What nameservers are consulted when determining the address of update.microsoft.com? Note that the presence of a CNAME record makes this question different from the previous one: you will need to run dig more than once to get the answer.
+
+  dig +trace -t a update.microsoft.com
+  dig +trace -t a update.microsoft.com.nsatc.net.
+
+  ;; Received 525 bytes from 2001:6b0:17:f000::9#53(2001:6b0:17:f000::9) in 3 ms
+  ;; Received 1187 bytes from 192.112.36.4#53(g.root-servers.net) in 405 ms
+  ;; Received 819 bytes from 192.41.162.30#53(l.gtld-servers.net) in 26 ms
+  ;; Received 329 bytes from 4.26.227.27#53(e.ns.nsatc.net) in 52 ms
+
+**************************************************

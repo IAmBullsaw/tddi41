@@ -1,0 +1,50 @@
+
+1-1 ./command.sh 'a b c' d e f
+
+    "$*" / $* will se: a b c d e f / a b c d e f
+
+    "$@" / $@ will se 'a b c' d e f / a b c d e f
+
+--------------------------------------------------
+
+2-1 För att a b c "very long" skall bli just "very long" och inte "very" "long"
+
+2-2 Nej, eftersom då får vi ut en endaste lång sträng som innehåller alla parametrar.
+
+--------------------------------------------------
+
+3-1 En while loop körs så länge som det som står inom [] är sant.
+    Ex:
+
+    while [ $i -lt 4 ]
+    do
+      echo "hejsan"
+    done
+
+    detta kommer att skriva ut hejsan till skärmen så länge som $1 < 4,
+    det innebär att så länge som detta är sant en gång så kommer det att
+    vara sant för evigt.
+
+--------------------------------------------------
+
+5-1 Läser första bokstaven i en parmeter, dvs slice mellan 0:1
+
+5-2 : betyder används som "no operation"
+
+5-3 $()
+
+5-4 Arithmetic expansion, alla token i uttrycket genomgår parameter och variabel expansion, command substitution samt borttagning av "' och resultatet är ett aritmetiskt.
+
+5-5 ls -a | grep -c -E "^[.]\w+"
+
+--------------------------------------------------
+
+6-1
+    a) Används för att dela upp kommandot på flera rader, interpretatorn kommer att tolka kommandot som en endaste rad när den körs.
+
+    b) När vi använder måsvingar så kommer all kod inom blocket att köras, sätter vi paranteser i stället så kommer vi att hoppa över exit kommandot och vi kommer förbi
+       spärren som kontrollerar om det finns 3 parametrar.
+
+6-2 Varabler är i bash globala per default. Genom att sätta local så ser vi till att variablen endast är tillgänglig i detta block.
+
+6-3 Troligtvis för att göra outputen mer läsbar.
