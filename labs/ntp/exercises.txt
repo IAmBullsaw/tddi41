@@ -37,6 +37,26 @@ ntpq -- standard NTP query program
     att ett svar inte skall kunna få en tidstämpel som är äldre än själva frågan. Genom att se till
     att klockan i stället saktar ner sig så undviks denna typ av konflikter.
 
-
-
 --------------------------------------------------
+
+3-3 Explain the output of ntpq -p.
+    ---
+    kommandot ntpq -p skriver ut information om de för servern kända "peers". 
+
+    Exempeloutput:
+         remote           refid      st t when poll reach   delay   offset  jitter
+    ==============================================================================
+    *gw.51.sysinst.i 130.236.178.1    3 u   51   64  377    0.324   -0.436   0.246
+
+    tally code: kan vara någon av " x.-+#*o" och har olika betydelser, kolla manpagen.
+    remote: vilken server det gäller
+    refid: vilken server som refererade denna server
+    st: vilken stratum-nivå servern har
+    t: vilken typ , local unicast multicast eller broadcast
+    when: när fick vi senaste paketet från denne server
+    poll: hur ofta vi frågar i sekunder
+    reach: "reachability"-registret
+    delay: nuvarande ungefärliga förskjutning
+    offset: berättar hur stort vårt tidsfel är
+    jitter: detta skall vara ett så lågt tal som möjligt ett högt tal innebär att vi har en dålig connection.  
+
