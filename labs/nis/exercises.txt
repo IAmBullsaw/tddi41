@@ -1,0 +1,25 @@
+2-1 Why use a directory service? Name one alternative to a directory service.
+
+  För att undvika att en användares filer återspeglas som dubletter på flera maskiner, men den stösta vinsten är så klart att en användare kan finna
+  åtkomst och kunna använda vilken dator som helst utan att vara begränsad till en specefik maskin som är konfigurerad för användaren.
+
+  Ett alternativ skulle vara ett system med en databas. Men eftersom som vi oftare läser än skriver så är det inte speciellt viktigt med
+  transactions eller rollbacks.
+
+2-2 Name at least two common directory services other than NIS.
+
+  Windows Active Directory
+  LDAP
+
+--------------------------------------------------
+
+5-1 What is the difference between using "compat" and using "files nis" as the list of sources for e.g. passwords in the name service switch.
+
+  compat används för att få tillgång till +/- funktionerna i passwd och group. Förenklat sagt ett sätt att få tillgång till ett annat syntax sett.
+
+
+5-3 Why should you use local files as the first information source instead of NIS.
+
+  Genom att filerna finns lokalt så undviker vi extra trafik till nätverket. Dessutom blir ju en del åtkomst tillgänglig även om
+  nätverket skulle gå ner.
+
