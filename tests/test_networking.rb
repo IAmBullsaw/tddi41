@@ -49,6 +49,5 @@ class NetworkingTest
     return a == b
   end
 end
-
 test_networking = NetworkingTest.new(["gw", "server", "client-1", "client-2"], ["10.0.0.1", "10.0.0.2", "10.0.0.3", "10.0.0.4"])
 test_networking.run
