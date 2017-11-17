@@ -16,6 +16,11 @@ class NISTest
     test_ypcat_passwd
   end
 
+  def test_response_should_include
+    return if @hostname == "gw"
+    response = %x(ntpq -p)
+  end
+
   def test_process_running
     return if @hostname == "gw"
   end
