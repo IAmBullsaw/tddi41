@@ -8,6 +8,7 @@ class NTPTests
 
   def run
     test_running_server
+    test_reach
   end
 
   def test_running_server
