@@ -14,7 +14,7 @@ class NTPTests
   def test_running_server
     result = %x(ntpq -p)
     source = result.split("\n")[-1].split[0].split('.')[0]
-    assert_equal(source, @expected_source)
+    puts assert_equal(source, @expected_source)
   end
 
   def test_reach
