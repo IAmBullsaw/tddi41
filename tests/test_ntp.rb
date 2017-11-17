@@ -3,7 +3,7 @@ class NTPTests
   def initialize()
     @hostname = %x(hostname).strip!
     @expected_source = "*ida-gw" if @hostname == "gw"
-    @expected_source = "*gw" if @hostname == "gw"
+    @expected_source = "*gw" if @hostname != "gw"
   end
 
   def run
