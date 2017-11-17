@@ -1,15 +1,24 @@
 class NTPTests
 
   def initialize()
-    @hostname = %x(hostname)
+    @hostname = %x(hostname).strip!
     @expected_source = "*ida-gw" if @hostname == "gw"
     @expected_source = "*gw" if @hostname == "gw"
   end
 
   def run
-    result = %(ntpq -p)
+    test_running_server
+  end
+
+  def test_running_server
+    result = %x(ntpq -p)
     source = result.split("\n")[-1].split[0].split('.')[0]
     assert_equal(source, @expected_source)
+  end
+
+  def test_reach
+    result = %x(ntpq -p)
+    puts assert_equal("377", result.strip.split[17])
   end
 
   def assert_equal(a,b)
