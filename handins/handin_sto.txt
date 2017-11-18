@@ -1,0 +1,24 @@
+
+11-1 Why is RAID 1+0 generally considered more reliable than RAID 0+1.
+
+  Eftersom RAID är funktionell även om vi förlorar en disk i varje grupp. När man står inför ett val så väljer man alltid RAID 1+0.
+
+
+11-2 As individual disk sizes grow, RAID-5 is no longer considered useful, and RAID-6 is also rapidly becoming obsolete. Why.
+
+  Eftersom det tar lång tid att återställa en disk via cheksum, i dag bär diskarna blir större och större så tar det orimligt
+  lång tid att återställa en disk via cheksum. Anra sätt för att säkerställa återställning behövs därmed.
+
+11-3 What is the point of the file system journal in e.g. ext3.
+
+  denna används för att logga metadata om vad som görs med filsystemet, innan den faktiska operationen utförs. Detta gör att filsystemet
+  inte behöver kontrolleras efter system krasch eller strömavbrott.
+
+11-4 Explain the purpose of using a volume manager, like LVM.
+
+  detta är själv abstraktionen av de fysiska diskarna för att skapa en virtuell disk. Detta innebär att en administaratör kan utöka och/eller minska
+  utrymmet för specefika applikationer eller data utan att starta om systemet.
+
+11-5 Optional: compute the probability of data loss over three years in a RAID-6 array consisting of 24 6TB SAS disks, with two hot spares (i.e. 22 disks in the RAID set). The RAID controller has 150MB/s throughput of which 80% can be used to rebuild. Assume MTBF of 145000 hours, latent sector error of 10E-13.
+
+  optional!

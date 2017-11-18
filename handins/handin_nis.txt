@@ -1,0 +1,82 @@
+2-1 Why use a directory service? Name one alternative to a directory service.
+
+  Den stösta vinsten är så klart att en användare kan finna åtkomst och kunna använda vilken dator som helst som är konfigurerad för tjänsten
+  utan att vara begränsad till en specefik maskin som är konfigurerad för användaren.
+
+  Ett alternativ skulle vara ett system med en databas. Men eftersom som vi oftare läser än skriver så är det inte speciellt viktigt med
+  transactions eller rollbacks.
+
+2-2 Name at least two common directory services other than NIS.
+
+  Active Directory (Windows)
+  LDAP
+  Hesiod
+  Lotus Domino
+
+--------------------------------------------------
+
+5-1 What is the difference between using "compat" and using "files nis" as the list of sources for e.g. passwords in the name service switch.
+
+  compat används för att få tillgång till +/- funktionerna i passwd och group. Förenklat sagt ett sätt att få tillgång till en annan syntax.
+
+
+5-3 Why should you use local files as the first information source instead of NIS.
+
+  Genom att filerna finns lokalt så undviker vi extra trafik till nätverket. Dessutom blir ju en del åtkomst tillgänglig även om
+  nätverket skulle gå ner.
+
+
+--------------------------------------------------
+
+class NISTest
+  def initialize()
+    @hostname = %x(hostname)
+    if @hostname == "server"
+      @expected_process = "ypserv"
+      @expected_ypwhich = "localhost"
+    else
+      @expected_process = "ypbind"
+      @expected_ypwhich = "server.51.sysinst.ida.liu.se"
+    end
+  end
+
+  def run
+    puts test_process_running.nil?  # if its nil the process is running as a daemon
+    puts test_server_ypwhich
+    puts test_ypcat_passwd
+  end
+
+  def test_process_running
+    return if @hostname == "gw"
+    proc_list = %x(ps aux)
+    proc_list.split("\n").each do |attributes|
+      unless attributes.split[6] == "?"
+        next  # unless its a daemon
+      else
+        return if attributes.split[10].end_with?(@expected_process)
+      end
+    end
+    return false
+  end
+
+  def test_server_ypwhich
+    return if @hostname == "gw"
+    sys_call = %x(ypwhich)
+    assert_equal(sys_call, @expected_ypwhich)
+  end
+
+  def test_ypcat_passwd
+    return if @hostname == "gw"
+    sys_call = %x(ypcat passwd.byuid).strip.split[0].start_with?("testuser")
+  end
+
+
+  def assert_equal(a, b)
+    a == b
+  end
+
+end
+
+test_nis = NISTest.new
+test_nis.run
+
