@@ -1,0 +1,17 @@
+2-1 Explain what the automounter is and how it works.
+
+  automountern är en daemon som ligger i bakgrunden och som när du accessar en mapp låt oss säga
+  users/nikni292 så mountar den in denna mappen vid första anrop. detta gör att filsystemet inte
+  innehåller onödiga mounts.
+
+2-2 Explain what an automount map is, and the difference between direct and indirect maps.
+
+  en direct map innehåller en entry för varje mount. en direct map kan även innehålla pointers
+  till andra
+
+  --
+
+
+2-3 What is the purpose of an automounter? Why not use static network mounts instead.
+
+  --
