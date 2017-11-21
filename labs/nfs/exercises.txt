@@ -8,7 +8,7 @@
 
   en automount map beskriver hur filsystemet kommer att bli mountat. direct maps listar en
   remotes absoluta path medans en inderekt ger pathenen relativt till sunträdes root.
-  inderekta maps används för att mounta in sunträdet i en specefik path.
+  inderekta maps används för att mounta in subträdet i en specifik path.
 
 2-3 What is the purpose of an automounter? Why not use static network mounts instead.
 
