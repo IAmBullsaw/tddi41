@@ -7,6 +7,8 @@ class NTPTests
   end
 
   def run
+    puts "All tests should respond with true"
+    puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     test_running_server
     test_reach
   end

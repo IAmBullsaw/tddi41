@@ -11,6 +11,8 @@ class NISTest
   end
 
   def run
+    puts "All tests should respond with true"
+    puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"    
     puts test_process_running.nil?  # if its nil the process is running as a daemon
     puts test_server_ypwhich
     puts test_ypcat_passwd
