@@ -25,6 +25,7 @@ class DNSTest
     end
 
     def test_name_resolution
+	puts "-> test_name_resolution"
       @hosts.each do |hostname, ip|
         next if @hostname.to_s == hostname.to_s
         host_ip = %x(host #{hostname.to_s}#{@domain})
@@ -34,6 +35,7 @@ class DNSTest
     end
 
     def test_reverse_dns
+	puts "-> test_reverse_dns"
       @hosts.each do |hostname, ip|
         next if @hostname.to_s == hostname.to_s
         host_name = %x(dig +short -x #{ip}).strip!
@@ -43,6 +45,7 @@ class DNSTest
     end
 
     def test_dig_hosts
+	puts "-> test_dig_hosts"
       @hosts.each do |key, value|
 	response = %x(dig #{key}.51.sysinst.ida.liu.se)
 	answer = response.match(';; ANSWER SECTION:\n(.+)\n')
@@ -55,14 +58,12 @@ class DNSTest
     end
 
     def test_ping_hosts
+	puts "-> test_ping_hosts"
       @hosts.each do |key, value|
 	response = %x{ping -c 1 #{key}}
-	puts response
-	puts response.match("PING\s(\S+)\s[(]([0-9.]+)[)]")
-	who = response.match("PING\s(\S+)\s[(]([0-9.]+)[)]")
-	puts who
-	puts who[1]
-	puts who[2]
+	who = response.match('PING\s(\S+)\s[(]([0-9.]+)[)]')
+	puts assert_equal(who[1],"#{key}#{@domain}")
+	puts assert_equal(who[2],value)
       end
     end
 
