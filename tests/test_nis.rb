@@ -11,6 +11,7 @@ class NISTest
   end
 
   def run
+    %x{ypbind} if @hostname == "client-1"
     puts "All tests should respond with true"
     puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"    
     puts test_process_running.nil?  # if its nil the process is running as a daemon
@@ -19,6 +20,7 @@ class NISTest
   end
 
   def test_process_running
+    puts "-> test_process_running"
     return if @hostname == "gw"
     proc_list = %x(ps aux)
     proc_list.split("\n").each do |attributes|
@@ -32,12 +34,14 @@ class NISTest
   end
 
   def test_server_ypwhich
+    puts "-> test_server_ypwhich"
     return if @hostname == "gw"
-    sys_call = %x(ypwhich)
+    sys_call = %x(ypwhich).strip!
     assert_equal(sys_call, @expected_ypwhich)
   end
 
   def test_ypcat_passwd
+    puts "-> test_ypcat_passwd"
     return if @hostname == "gw"
     sys_call = %x(ypcat passwd.byuid).strip.split[0].start_with?("testuser")
   end
