@@ -18,12 +18,16 @@ function createUserName () {
 }
 
 function createUserPassword () {
-  echo $(date +%s | sha256sum | base64 | head -c 32)
+  # $(date +%s | sha256sum | base64 | head -c 32)
+  echo "a"
 }
 
 function addUser () {
   adduser $1 --gecos "first last, roomnumber, workphone, homephone" --disabled-password
   echo "$1:$2" | chpasswd
+  [ $(((RANDOM%1))) -eq 0 ] && HOMEDIR=home1 || HOMEDIR=home2
+  mv "/home/$1" "/$HOMEDIR/$1" 
+  echo -e "$1\t10.0.0.2:/$HOMEDIR/$1" >> /etc/auto.home
 }
 
 [ "$1" ] && [ -e "$1" ] || { printUsage; exit 1;} #file exists?
@@ -36,3 +40,10 @@ while IFS=" " read fname lname; do
   echo "$(addUser $user $passwd)" > /dev/null
   echo "$user  | $passwd"
 done < "$1"
+
+echo "--------------------------------------------"
+echo "updating maps... "
+make -C /var/yp
+service ypserv restart
+echo "--------------------------------------------"
+echo "added users done"
